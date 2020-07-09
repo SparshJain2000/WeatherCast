@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Grid, Paper, Card, Typography, CardContent, Avatar } from '@material-ui/core';
+import { Button, Grid, Paper, Card, Typography, CardContent, Avatar, CardMedia } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { deepOrange, orange } from '@material-ui/core/colors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -51,60 +51,99 @@ export default class WeatherInfo extends Component {
 				}}>
 				<Grid container direction='column' justify='center' alignItems='center' xs={12} item>
 					<Card
-						style={{ minWidth: '70%', padding: '12px', backgroundColor: 'rgba(255,255,255,.3)' }}
+						style={{
+							display         : 'flex',
+							minWidth        : '70%',
+							padding         : '12px',
+							backgroundColor : 'rgba(255,255,255,.3)'
+						}}
 						m={3}
 						p={3}>
-						<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
-							<Avatar src={date} />
+						<CardMedia
+							component='img'
+							image={date}
+							style={{ marginLeft: '100px', width: '100%', maxWidth: '80px', height: 'auto' }}
+						/>
+						<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+							{/* <Avatar src={date} /> */}
 							<Typography variant='h5'>{this.getDate(weather.dt)}</Typography>
 						</CardContent>
 					</Card>
 				</Grid>
 				<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-					<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
-						<CardContent style={{ display: 'flex', justifyContent: 'center	' }}>
-							<Avatar src={thermometer} />
+					<Card style={{ display: 'flex', backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
+						<CardMedia
+							component='img'
+							image={thermometer}
+							style={{ width: '100%', maxWidth: '80px', height: 'auto' }}
+						/>
+						<CardContent style={{ display: 'flex', justifyContent: 'center	', width: '100%' }}>
+							{/* <Avatar src={thermometer} /> */}
 							<Typography variant='h6'>{weather.temp.max}</Typography>
 						</CardContent>
 					</Card>
 				</Grid>
 				<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-					<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
-						<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
-							{/* <FontAwesomeIcon icon={faWind} /> */}
-							<Avatar src={wind} />
+					<Card style={{ display: 'flex', backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
+						<CardMedia
+							component='img'
+							image={wind}
+							style={{ width: '100%', maxWidth: '80px', height: 'auto' }}
+						/>
+						<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+							{/* <Avatar src={wind} /> */}
 							<Typography variant='h6'>{weather.wind_speed}</Typography>
 						</CardContent>
 					</Card>
 				</Grid>
 				<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-					<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
-						<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
-							<Avatar src={rain} />
+					<Card style={{ display: 'flex', backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
+						<CardMedia
+							component='img'
+							image={rain}
+							style={{ width: '100%', maxWidth: '80px', height: 'auto' }}
+						/>
+						<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+							{/* <Avatar src={rain} /> */}
 							<Typography variant='h6'>{weather.humidity}</Typography>
 						</CardContent>
 					</Card>
 				</Grid>
 				<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-					<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
-						<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
-							<Avatar src={clouds} />
+					<Card style={{ display: 'flex', backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
+						<CardMedia
+							component='img'
+							image={clouds}
+							style={{ width: '100%', maxWidth: '80px', height: 'auto' }}
+						/>
+						<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+							{/* <Avatar src={clouds} /> */}
 							<Typography variant='h6'>{weather.clouds}</Typography>
 						</CardContent>
 					</Card>
 				</Grid>
 				<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-					<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
-						<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
-							<Avatar src={sunset} />
+					<Card style={{ display: 'flex', backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
+						<CardMedia
+							component='img'
+							image={sunset}
+							style={{ width: '100%', maxWidth: '80px', height: 'auto' }}
+						/>
+						<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+							{/* <Avatar src={sunset} /> */}
 							<Typography variant='h6'>{this.getTime(weather.sunset)}</Typography>
 						</CardContent>
 					</Card>
 				</Grid>
 				<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-					<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
-						<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
-							<Avatar src={sunrise} />
+					<Card style={{ display: 'flex', backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
+						<CardMedia
+							component='img'
+							image={sunrise}
+							style={{ width: '100%', maxWidth: '80px', height: 'auto' }}
+						/>
+						<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+							{/* <Avatar src={sunrise} /> */}
 							<Typography variant='h6'>{this.getTime(weather.sunrise)}</Typography>
 						</CardContent>
 					</Card>

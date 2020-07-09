@@ -77,50 +77,88 @@ export default class CurrentWeather extends Component {
 							</Card> */}
 						</Grid>
 						<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-							<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
-								<CardContent style={{ display: 'flex', justifyContent: 'center	' }}>
-									<Avatar src={thermometer} />
+							<Card style={{ display: 'flex', backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
+								<CardMedia
+									component='img'
+									image={thermometer}
+									style={{ width: '100%', maxWidth: '80px', height: 'auto' }}
+								/>
+								<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+									{/* <Avatar src={thermometer} /> */}
 									<Typography variant='h6'>{weather.temp} °C</Typography>
 								</CardContent>
 							</Card>
 						</Grid>
 						<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-							<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
-								<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
+							{/* <Typography variant='h5'>Wind Speed</Typography> */}
+							<Card style={{ display: 'flex', backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
+								<CardMedia
+									component='img'
+									image={wind}
+									style={{ width: '100%', maxWidth: '80px', height: 'auto' }}
+								/>
+								<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
 									{/* <FontAwesomeIcon icon={faWind} /> */}
-									<Avatar src={wind} />
 									<Typography variant='h6'>{weather.wind_speed} km/h</Typography>
 								</CardContent>
 							</Card>
 						</Grid>
 						<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-							<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
-								<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
-									<Avatar src={rain} />
+							<Card style={{ display: 'flex', backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
+								<CardMedia
+									component='img'
+									image={rain}
+									style={{
+										width    : '100%',
+										maxWidth : '80px',
+										height   : 'auto'
+									}}
+								/>
+
+								<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+									{/* <Avatar src={rain} /> */}
 									<Typography variant='h6'>{weather.humidity} %</Typography>
 								</CardContent>
 							</Card>
 						</Grid>
 						<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-							<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
-								<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
-									<Avatar src={clouds} />
+							<Card style={{ display: 'flex', backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
+								<CardMedia
+									component='img'
+									image={clouds}
+									style={{ width: '100%', maxWidth: '80px', height: 'auto' }}
+								/>
+
+								<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+									{/* <Avatar src={clouds} /> */}
 									<Typography variant='h6'>{weather.clouds} %</Typography>
 								</CardContent>
 							</Card>
 						</Grid>
 						<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-							<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
-								<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
-									<Avatar src={sunset} />
+							<Card style={{ display: 'flex', backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
+								<CardMedia
+									component='img'
+									image={sunset}
+									style={{ width: '100%', maxWidth: '80px', height: 'auto' }}
+								/>
+
+								<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+									{/* <Avatar src={sunset} /> */}
 									<Typography variant='h6'>{this.getTime(weather.sunset)}</Typography>
 								</CardContent>
 							</Card>
 						</Grid>
 						<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-							<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
-								<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
-									<Avatar src={sunrise} />
+							<Card style={{ display: 'flex', backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
+								<CardMedia
+									component='img'
+									image={sunrise}
+									style={{ width: '100%', maxWidth: '80px', height: 'auto' }}
+								/>
+
+								<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+									{/* <Avatar src={sunrise} /> */}
 									<Typography variant='h6'>{this.getTime(weather.sunrise)}</Typography>
 								</CardContent>
 							</Card>

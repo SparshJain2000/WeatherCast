@@ -6,6 +6,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import WeatherInfo from './weatherInfo';
 import CurrentWeather from './currentWeather';
+import Loader from 'react-loader-spinner'
 import {
 	faWind,
 	faTemperatureHigh,
@@ -20,18 +21,14 @@ export default class Main extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
-			key      : 'aasdsa',
-			temp     : '',
-			feelLike : '',
-			wind     : '',
-			humidity : '',
-			clouds   : '',
-			uvi      : '',
-			current  : null,
-			show     : false,
-			daily    : []
+			current  			: null,
+			showForecast     	: false,
+			showCharts			:false,
+			daily    			: []
 		};
-		this.toggleShow = this.toggleShow.bind(this);
+		this.toggleShowForecast = this.toggleShowForecast.bind(this);
+		this.toggleShowCharts = this.toggleShowCharts.bind(this);
+
 		// this.getTheme = this.getTheme.bind(this);
 	}
 	// getTheme() {
@@ -47,10 +44,23 @@ export default class Main extends Component {
 	//         },
 	//     });
 	// }
-	toggleShow () {
+	toggleShowForecast () {
 		this.setState({
-			show : !this.state.show
+			showForecast : !this.state.showForecast
 		});
+	}
+	toggleShowCharts () {
+		this.setState({
+			showCharts : !this.state.showCharts
+		});
+	}
+	getTemperatures(daily){
+		let temp=[]
+		daily.forEach((data)=>{
+			temp=[...temp,data.temp.day]
+		})
+		console.log(temp);
+		// return temp;
 	}
 	componentDidMount () {
 		if (navigator.geolocation) {
@@ -92,20 +102,49 @@ export default class Main extends Component {
 					<div style={{ display: 'flex', justifyContent: 'center' }}>
 						{' '}
 						<Avatar src={sun} style={{ width: '45px', height: '100%', marginRight: '10px' }} />
-						<Typography variant='h3'>Weather</Typography>
+						<Typography variant='h3' style={{ fontFamliy: 'Merienda One' }}>
+							Weather
+						</Typography>
 					</div>
-					{this.state.current ? <CurrentWeather current={this.state.current} /> : <p>No</p>}
-					<Button
-						size='large'
-						variant='contained'
-						color='primary'
-						onClick={this.toggleShow}
-						style={{ marginTop: '24px', width: '80%' }}>
-						View More
-					</Button>
+					{this.state.current ? 
+					<CurrentWeather current={this.state.current} /> 
+					:
+					 <Loader
+					 	type="Bars"
+        				color="#3f51b5"
+         				height={300}
+         				width={300}
+         				timeout={1000} //1 secs
+ 
+      				/>}
+					<div
+						style={{
+							display        : 'flex',
+							justifyContent : 'between',
+							marginTop      : '10px',
+							width          : '95%'
+						}}>
+						<Button
+							size='large'
+							variant='contained'
+							color='primary'
+							onClick={this.toggleShowForecast}
+							style={{ margin: '8px', width: '50%' }}>
+							View Forecast
+						</Button>
+						<Button
+							size='large'
+							variant='contained'
+							color='secondary'
+							onClick={this.getTemperatures(this.state.daily)}
+							style={{ margin: '8px', width: '50%' }}>
+							View Charts
+						</Button>
+					</div>
 				</Grid>
-				{this.state.show &&
+				{this.state.showForecast &&
 					this.state.daily.map((weather) => <WeatherInfo key={weather.dt} weather={weather} />)}
+					{this.state.showCharts && <div>charts</div>}
 			</div>
 			// </ThemeProvider>
 		);
