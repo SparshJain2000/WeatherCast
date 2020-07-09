@@ -64,7 +64,6 @@ export default class Main extends Component {
 		daily.forEach((data)=>{
 			temp=[...temp,{x:this.getDate(data.dt),y:data.temp.day}]
 		})
-		console.log(temp);
 		return temp;
 	}
 	getRain(daily){
@@ -72,7 +71,6 @@ export default class Main extends Component {
 		daily.forEach((data)=>{
 			rain=[...rain,{x:this.getDate(data.dt),y:data.rain}]
 		})
-		console.log(rain);
 		return rain;
 	}
 	componentDidMount () {
