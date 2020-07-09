@@ -50,15 +50,18 @@ export default class WeatherInfo extends Component {
 					maxWidth        : '90vw'
 				}}>
 				<Grid container direction='column' justify='center' alignItems='center' xs={12} item>
-					<Card style={{ minWidth: '70%', padding: '24px' }} m={5} p={5}>
+					<Card
+						style={{ minWidth: '70%', padding: '12px', backgroundColor: 'rgba(255,255,255,.3)' }}
+						m={3}
+						p={3}>
 						<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
 							<Avatar src={date} />
-							<Typography variant='h4'>{this.getDate(weather.dt)}</Typography>
+							<Typography variant='h5'>{this.getDate(weather.dt)}</Typography>
 						</CardContent>
 					</Card>
 				</Grid>
 				<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-					<Card style={{ minWidth: '80%' }}>
+					<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
 						<CardContent style={{ display: 'flex', justifyContent: 'center	' }}>
 							<Avatar src={thermometer} />
 							<Typography variant='h6'>{weather.temp.max}</Typography>
@@ -66,7 +69,7 @@ export default class WeatherInfo extends Component {
 					</Card>
 				</Grid>
 				<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-					<Card style={{ minWidth: '80%' }}>
+					<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
 						<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
 							{/* <FontAwesomeIcon icon={faWind} /> */}
 							<Avatar src={wind} />
@@ -75,7 +78,7 @@ export default class WeatherInfo extends Component {
 					</Card>
 				</Grid>
 				<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-					<Card style={{ minWidth: '80%' }}>
+					<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
 						<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
 							<Avatar src={rain} />
 							<Typography variant='h6'>{weather.humidity}</Typography>
@@ -83,7 +86,7 @@ export default class WeatherInfo extends Component {
 					</Card>
 				</Grid>
 				<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-					<Card style={{ minWidth: '80%' }}>
+					<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
 						<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
 							<Avatar src={clouds} />
 							<Typography variant='h6'>{weather.clouds}</Typography>
@@ -91,7 +94,7 @@ export default class WeatherInfo extends Component {
 					</Card>
 				</Grid>
 				<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-					<Card style={{ minWidth: '80%' }}>
+					<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
 						<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
 							<Avatar src={sunset} />
 							<Typography variant='h6'>{this.getTime(weather.sunset)}</Typography>
@@ -99,7 +102,7 @@ export default class WeatherInfo extends Component {
 					</Card>
 				</Grid>
 				<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-					<Card style={{ minWidth: '80%' }}>
+					<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
 						<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
 							<Avatar src={sunrise} />
 							<Typography variant='h6'>{this.getTime(weather.sunrise)}</Typography>

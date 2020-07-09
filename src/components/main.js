@@ -98,7 +98,7 @@ export default class Main extends Component {
 					<Button
 						size='large'
 						variant='contained'
-						color='secondary'
+						color='primary'
 						onClick={this.toggleShow}
 						style={{ marginTop: '24px', width: '80%' }}>
 						View More
