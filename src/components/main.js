@@ -25,7 +25,8 @@ export default class Main extends Component {
 			current  			: null,
 			showForecast     	: false,
 			showCharts			:false,
-			daily    			: []
+			daily    			: [],
+			hourly:[]
 		};
 		this.toggleShowForecast = this.toggleShowForecast.bind(this);
 		this.toggleShowCharts = this.toggleShowCharts.bind(this);
@@ -86,14 +87,15 @@ export default class Main extends Component {
 				console.log('Latitude: ' + position.coords.latitude + '<br>Longitude: ' + position.coords.longitude);
 				axios
 					.get(
-						`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=hourly,minutely&appid=${process
+						`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely&appid=${process
 							.env.REACT_APP_API_KEY}&units=metric`
 					)
 					.then((resp) => {
 						console.log(resp);
 						this.setState({
 							daily   : resp.data.daily,
-							current : resp.data.current
+							current : resp.data.current,
+							hourly:resp.data.hourly
 						});
 						console.log(this.state.current);
 					})
@@ -123,14 +125,14 @@ export default class Main extends Component {
 						</Typography>
 					</div> */}
 					{this.state.current ? 
-					<CurrentWeather current={this.state.current} /> 
+					<CurrentWeather current={this.state.current} rain={this.state.hourly[22].rain['1h']} /> 
 					:
 					 <Loader
 					 	type="Bars"
         				color="#3f51b5"
          				height={300}
          				width={300}
-         				timeout={1000} //1 secs
+         				// timeout={1000} //1 secs
  
       				/>}
 					<div

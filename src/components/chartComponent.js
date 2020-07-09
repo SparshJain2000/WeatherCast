@@ -58,14 +58,14 @@ export default class Charts extends Component {
                 }
 			},
 			axisY: {
-                title: "Rain (in cm)",
+                title: "Rain (in mm)",
                 margin:20,
                 includeZero: false,
 			},
 			data: [{
                 type: "splineArea",
 				xValueFormatString: "DD MMM",
-                yValueFormatString: "## cm",
+                yValueFormatString: "## mm",
                 color: "#4657bb",
 				dataPoints: this.props.rainArray
 			}]
