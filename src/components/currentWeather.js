@@ -50,14 +50,16 @@ export default class CurrentWeather extends Component {
 						style={{
 							backgroundColor : 'rgba(0,0,0,.4)',
 							borderRadius    : '12px',
-							margin          : '5vw',
-							padding         : '16px',
+							marginTop       : '12px',
+							padding         : '12px',
 							maxWidth        : '90vw',
 							height          : 'fit-content'
 						}}>
 						<Grid container direction='column' justify='center' alignItems='center' xs={12} item>
-							<Typography variant='h1'>Today's weather</Typography>
-
+							<Typography variant='h4' style={{ textAlign: 'center', color: 'white' }}>
+								Today's weather
+							</Typography>
+							{/* 
 							<Card
 								style={{
 									backgroundColor : 'rgba(255,255,255,.5)',
@@ -67,18 +69,18 @@ export default class CurrentWeather extends Component {
 								}}
 								m={5}
 								p={5}>
-								{/* <CardMedia component='img' image={date} width='151'/> */}
+								
 								<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
 									<Avatar src={date} />
 									<Typography variant='h4'>{this.getDate(weather.dt)}</Typography>
 								</CardContent>
-							</Card>
+							</Card> */}
 						</Grid>
 						<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
 							<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
 								<CardContent style={{ display: 'flex', justifyContent: 'center	' }}>
 									<Avatar src={thermometer} />
-									<Typography variant='h6'>{weather.temp}</Typography>
+									<Typography variant='h6'>{weather.temp} °C</Typography>
 								</CardContent>
 							</Card>
 						</Grid>
@@ -87,7 +89,7 @@ export default class CurrentWeather extends Component {
 								<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
 									{/* <FontAwesomeIcon icon={faWind} /> */}
 									<Avatar src={wind} />
-									<Typography variant='h6'>{weather.wind_speed}</Typography>
+									<Typography variant='h6'>{weather.wind_speed} km/h</Typography>
 								</CardContent>
 							</Card>
 						</Grid>
@@ -95,7 +97,7 @@ export default class CurrentWeather extends Component {
 							<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
 								<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
 									<Avatar src={rain} />
-									<Typography variant='h6'>{weather.humidity}</Typography>
+									<Typography variant='h6'>{weather.humidity} %</Typography>
 								</CardContent>
 							</Card>
 						</Grid>
@@ -103,7 +105,7 @@ export default class CurrentWeather extends Component {
 							<Card style={{ backgroundColor: 'rgba(255,255,255,.5)', minWidth: '80%' }}>
 								<CardContent style={{ display: 'flex', justifyContent: 'center' }}>
 									<Avatar src={clouds} />
-									<Typography variant='h6'>{weather.clouds}</Typography>
+									<Typography variant='h6'>{weather.clouds} %</Typography>
 								</CardContent>
 							</Card>
 						</Grid>

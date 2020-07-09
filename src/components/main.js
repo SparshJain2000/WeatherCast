@@ -28,8 +28,10 @@ export default class Main extends Component {
 			clouds   : '',
 			uvi      : '',
 			current  : null,
+			show     : false,
 			daily    : []
 		};
+		this.toggleShow = this.toggleShow.bind(this);
 		// this.getTheme = this.getTheme.bind(this);
 	}
 	// getTheme() {
@@ -45,6 +47,11 @@ export default class Main extends Component {
 	//         },
 	//     });
 	// }
+	toggleShow () {
+		this.setState({
+			show : !this.state.show
+		});
+	}
 	componentDidMount () {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((position) => {
@@ -74,13 +81,31 @@ export default class Main extends Component {
 		return (
 			// <ThemeProvider theme={this.getTheme()}>
 			<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'between', margin: '12px' }}>
-				<div style={{ display: 'flex', justifyContent: 'center' }}>
-					{' '}
-					<Avatar src={sun} style={{ width: '45px', height: '100%', marginRight: '10px' }} />
-					<Typography variant='h3'>Weather</Typography>
-				</div>
-				{this.state.current ? <CurrentWeather current={this.state.current} /> : <p>No</p>}
-				{this.state.daily.map((weather) => <WeatherInfo key={weather.dt} weather={weather} />)}
+				<Grid
+					container
+					spacing={1}
+					style={{
+						display       : 'flex',
+						flexDirection : 'column',
+						alignItems    : 'center'
+					}}>
+					<div style={{ display: 'flex', justifyContent: 'center' }}>
+						{' '}
+						<Avatar src={sun} style={{ width: '45px', height: '100%', marginRight: '10px' }} />
+						<Typography variant='h3'>Weather</Typography>
+					</div>
+					{this.state.current ? <CurrentWeather current={this.state.current} /> : <p>No</p>}
+					<Button
+						size='large'
+						variant='contained'
+						color='secondary'
+						onClick={this.toggleShow}
+						style={{ marginTop: '24px', width: '80%' }}>
+						View More
+					</Button>
+				</Grid>
+				{this.state.show &&
+					this.state.daily.map((weather) => <WeatherInfo key={weather.dt} weather={weather} />)}
 			</div>
 			// </ThemeProvider>
 		);
