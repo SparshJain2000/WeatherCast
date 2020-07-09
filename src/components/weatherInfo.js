@@ -62,7 +62,7 @@ export default class WeatherInfo extends Component {
 						<CardMedia
 							component='img'
 							image={date}
-							style={{ marginLeft: '100px', width: '100%', maxWidth: '80px', height: 'auto' }}
+							style={{ marginLeft: '15%', width: '100%', maxWidth: '80px', height: 'auto' }}
 						/>
 						<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
 							{/* <Avatar src={date} /> */}

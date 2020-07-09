@@ -47,29 +47,34 @@ export default class Main extends Component {
 	// }
 	toggleShowForecast () {
 		this.setState({
-			showForecast : !this.state.showForecast
+			showForecast : !this.state.showForecast,
+			showCharts:false
+			// showCharts:!this.state.showCharts
 		});
 	}
 	toggleShowCharts () {
 		this.setState({
-			showCharts : !this.state.showCharts
+			showCharts : !this.state.showCharts,
+			showForecast:false
 		});
 	}
 	getDate (dt) {
 		let x = new Date(dt * 1000);
-		return x;
+		return `${x.getFullYear()},${x.getMonth()},${x.getDate()}`;
+		// return x.slice(5, x.length - 18);
+
 	}
 	getTemperatures(daily){
 		let temp=[]
 		daily.forEach((data)=>{
-			temp=[...temp,{x:this.getDate(data.dt),y:data.temp.day}]
+			temp=[...temp,{x:new Date(this.getDate(data.dt)),y:data.temp.day}]
 		})
 		return temp;
 	}
 	getRain(daily){
 		let rain=[]
 		daily.forEach((data)=>{
-			rain=[...rain,{x:this.getDate(data.dt),y:data.rain}]
+			rain=[...rain,{x:new Date(this.getDate(data.dt)),y:(data.rain?data.rain:0)}]
 		})
 		return rain;
 	}
@@ -110,13 +115,13 @@ export default class Main extends Component {
 						flexDirection : 'column',
 						alignItems    : 'center'
 					}}>
-					<div style={{ display: 'flex', justifyContent: 'center' }}>
+					{/* <div style={{ display: 'flex', justifyContent: 'center' }}>
 						{' '}
 						<Avatar src={sun} style={{ width: '45px', height: '100%', marginRight: '10px' }} />
-						<Typography variant='h3' style={{ fontFamliy: 'Merienda One' }}>
+						<Typography variant='h3' component='h3' style={{ fontFamliy: 'Merienda One' }}>
 							Weather
 						</Typography>
-					</div>
+					</div> */}
 					{this.state.current ? 
 					<CurrentWeather current={this.state.current} /> 
 					:

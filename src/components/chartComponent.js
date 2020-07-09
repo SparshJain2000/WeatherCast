@@ -15,23 +15,24 @@ export default class Charts extends Component {
             backgroundColor: "rgba(255,255,255,.3)",
 			title:{
                 text: "Temperature for next 7 days",
-                padding:10
+                padding:10,
 			},
 			axisX:{
                 valueFormatString: "DD MMM",
-                margin:10
+                margin:10,
+                labelWrap:false,
 			},
 			axisY: {
                 title: "Temperature (in °C)",
                 margin:20,
                 includeZero: false,
+                suffix:'°C'
 			},
 			data: [{
-                // type: "area",
                 type: "splineArea",
 				xValueFormatString: "DD MMM",
                 yValueFormatString: "## °C",
-                color: "#f50057",
+                color: "#00695f",
 				dataPoints: this.props.tempArray
 			}]
 		}
@@ -42,36 +43,42 @@ export default class Charts extends Component {
             zoomEnabled: true,
             backgroundColor: "rgba(255,255,255,.3)",
 			title:{
-                text: "Temperature for next 7 days",
+                text: "Rain for next 7 days",
                 padding:10
 			},
 			axisX:{
                 valueFormatString: "DD MMM",
-                margin:10
+                margin:10,
+                labelWrap:   true,
+                crosshair:{
+                    enabled:true,
+                    
+                    labelMaxWidth: 100,
+                    labelWrap: true,
+                }
 			},
 			axisY: {
-                title: "Temperature (in °C)",
+                title: "Rain (in cm)",
                 margin:20,
                 includeZero: false,
 			},
 			data: [{
-                // type: "area",
                 type: "splineArea",
 				xValueFormatString: "DD MMM",
-                yValueFormatString: "## °C",
+                yValueFormatString: "## cm",
                 color: "#4657bb",
 				dataPoints: this.props.rainArray
 			}]
 		}
 		
 		return (
-            <div>
-		<div style={{margin:'24px'}}>
-			<CanvasJSChart options = {options} />
-		</div>
-        <div style={{margin:'24px'}}>
-			<CanvasJSChart options = {options2} />
-		</div>
+        <div>
+            <div style={{margin:'24px'}}>
+                <CanvasJSChart options = {options} />
+            </div>
+            <div style={{margin:'24px'}}>
+                <CanvasJSChart options = {options2} />
+            </div>
         </div>
 		);
 	}
