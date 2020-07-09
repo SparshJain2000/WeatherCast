@@ -6,7 +6,8 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import WeatherInfo from './weatherInfo';
 import CurrentWeather from './currentWeather';
-import Loader from 'react-loader-spinner'
+import Loader from 'react-loader-spinner';
+import Charts from './chartComponent';
 import {
 	faWind,
 	faTemperatureHigh,
@@ -54,13 +55,25 @@ export default class Main extends Component {
 			showCharts : !this.state.showCharts
 		});
 	}
+	getDate (dt) {
+		let x = new Date(dt * 1000);
+		return x;
+	}
 	getTemperatures(daily){
 		let temp=[]
 		daily.forEach((data)=>{
-			temp=[...temp,data.temp.day]
+			temp=[...temp,{x:this.getDate(data.dt),y:data.temp.day}]
 		})
 		console.log(temp);
-		// return temp;
+		return temp;
+	}
+	getRain(daily){
+		let rain=[]
+		daily.forEach((data)=>{
+			rain=[...rain,{x:this.getDate(data.dt),y:data.rain}]
+		})
+		console.log(rain);
+		return rain;
 	}
 	componentDidMount () {
 		if (navigator.geolocation) {
@@ -136,7 +149,7 @@ export default class Main extends Component {
 							size='large'
 							variant='contained'
 							color='secondary'
-							onClick={this.getTemperatures(this.state.daily)}
+							onClick={this.toggleShowCharts}
 							style={{ margin: '8px', width: '50%' }}>
 							View Charts
 						</Button>
@@ -144,7 +157,7 @@ export default class Main extends Component {
 				</Grid>
 				{this.state.showForecast &&
 					this.state.daily.map((weather) => <WeatherInfo key={weather.dt} weather={weather} />)}
-					{this.state.showCharts && <div>charts</div>}
+					{this.state.showCharts && <Charts tempArray={this.getTemperatures(this.state.daily)} rainArray={this.getRain(this.state.daily)}/>}
 			</div>
 			// </ThemeProvider>
 		);
