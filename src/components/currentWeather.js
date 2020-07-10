@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
 import Loader from 'react-loader-spinner';
 import CanvasJSReact from '../charts/canvasjs.react';
-
 import rain from '../images/rain.png';
-import fog from '../images/fog.png';
 import sunrise from '../images/sunrise.png';
 import sunset from '../images/sunset.png';
 import thermometer from '../images/thermometer.png';
-import haze from '../images/haze.png';
-import wind from '../images/wind.png';
-import clouds from '../images/clouds.png';
-import date from '../images/date.png';
+
 import { Button, CardHeader, Grid, Card, Typography, CardContent, Avatar, Zoom } from '@material-ui/core';
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
-// const getDate=(dt)=> {
-// 	let x = new Date(dt * 1000);
-// 	return `${x.getFullYear()},${x.getMonth()},${x.getDate()}`;
-// }
 const Chart = ({ hourly }) => {
 	const tempHourly = hourly.map((data) => {
 		return { x: data.dt * 1000, y: data.temp, weather: data.weather[0].main };
@@ -245,7 +236,7 @@ export default class CurrentWeather extends Component {
 											style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
 											{/* <Avatar src={rain} /> */}
 											<Typography variant='p' style={{ textAlign: 'center' }}>
-												{this.props.rain} %
+												{this.props.rain} mm
 											</Typography>
 										</CardContent>
 									</div>

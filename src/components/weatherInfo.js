@@ -1,25 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Grid, Paper, Card, CardHeader, Typography, CardContent, Avatar, CardMedia } from '@material-ui/core';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { deepOrange, orange } from '@material-ui/core/colors';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-	faWind,
-	faTemperatureHigh,
-	faCloudRain,
-	faCloudSun,
-	faLowVision,
-	faMapMarkerAlt,
-	faSun
-} from '@fortawesome/free-solid-svg-icons';
+import { Grid, Card, CardHeader, Typography, CardContent, Avatar, CardMedia } from '@material-ui/core';
 import rain from '../images/rain.png';
-import fog from '../images/fog.png';
 import sunrise from '../images/sunrise.png';
 import sunset from '../images/sunset.png';
 import thermometer from '../images/thermometer.png';
-import haze from '../images/haze.png';
-import wind from '../images/wind.png';
-import clouds from '../images/clouds.png';
 import date from '../images/date.png';
 
 export default class WeatherInfo extends Component {
@@ -134,13 +118,7 @@ export default class WeatherInfo extends Component {
 								}}
 							/>
 							<div style={{ display: 'flex' }}>
-								{/* <CardMedia
-									component='img'
-									image={thermometer}
-									style={{ width: '100%', maxWidth: '80px', height: 'auto' }}
-								/> */}
 								<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-									{/* <Avatar src={thermometer} /> */}
 									<Typography variant='h6' style={{ textAlign: 'center' }}>
 										{weather.temp.max} °C
 									</Typography>
@@ -173,7 +151,6 @@ export default class WeatherInfo extends Component {
 
 							<div style={{ display: 'flex' }}>
 								<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-									{/* <Avatar src={rain} /> */}
 									<Typography variant='h6' style={{ textAlign: 'center' }}>
 										{weather.rain ? weather.rain : '?'} mm
 									</Typography>
@@ -204,14 +181,7 @@ export default class WeatherInfo extends Component {
 								}}
 							/>
 							<div style={{ display: 'flex' }}>
-								{/* <CardMedia
-									component='img'
-									image={sunset}
-									style={{ width: '100%', maxWidth: '70px', height: 'auto' }}
-								/> */}
-
 								<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-									{/* <Avatar src={sunset} /> */}
 									<Typography variant='h6' style={{ textAlign: 'center' }}>
 										{this.getTime(weather.sunset)}
 									</Typography>
@@ -241,14 +211,7 @@ export default class WeatherInfo extends Component {
 								}}
 							/>
 							<div style={{ display: 'flex' }}>
-								{/* <CardMedia
-									component='img'
-									image={sunset}
-									style={{ width: '100%', maxWidth: '70px', height: 'auto' }}
-								/> */}
-
 								<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-									{/* <Avatar src={sunset} /> */}
 									<Typography variant='h6' style={{ textAlign: 'center' }}>
 										{this.getTime(weather.sunrise)}
 									</Typography>

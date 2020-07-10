@@ -1,23 +1,11 @@
 import React, { Component } from 'react';
 import { Button, Grid, Zoom } from '@material-ui/core';
-// import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-// import { deepOrange, orange } from '@material-ui/core/colors';
 import axios from 'axios';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import WeatherInfo from './weatherInfo';
 import CurrentWeather from './currentWeather';
 import Loader from 'react-loader-spinner';
 import Charts from './chartComponent';
-// import {
-// 	faWind,
-// 	faTemperatureHigh,
-// 	faCloudRain,
-// 	faCloudSun,
-// 	faLowVision,
-// 	faMapMarkerAlt
-// } from '@fortawesome/free-solid-svg-icons';
-// import sun from '../images/sun.svg';
-// const theme =
+
 export default class Main extends Component {
 	constructor (props) {
 		super(props);
@@ -30,22 +18,7 @@ export default class Main extends Component {
 		};
 		this.toggleShowForecast = this.toggleShowForecast.bind(this);
 		this.toggleShowCharts = this.toggleShowCharts.bind(this);
-
-		// this.getTheme = this.getTheme.bind(this);
 	}
-	// getTheme() {
-	//     return createMuiTheme({
-	//         palette: {
-	//             type: "dark",
-	//             primary: {
-	//                 main: orange[500],
-	//             },
-	//             secondary: {
-	//                 main: deepOrange[500],
-	//             },
-	//         },
-	//     });
-	// }
 	toggleShowForecast () {
 		this.setState({
 			showForecast : !this.state.showForecast,
@@ -67,7 +40,6 @@ export default class Main extends Component {
 		daily.forEach((data) => {
 			temp = [ ...temp, { x: new Date(this.getDate(data.dt)), y: data.temp } ];
 		});
-		console.log(temp);
 		return temp;
 	}
 	getWind (daily) {
@@ -78,7 +50,6 @@ export default class Main extends Component {
 				{ x: new Date(this.getDate(data.dt)), y: { speed: data.wind_speed, dir: data.wind_deg } }
 			];
 		});
-		console.log(wind);
 		return wind;
 	}
 	getRain (daily) {
@@ -114,6 +85,16 @@ export default class Main extends Component {
 			console.log('Geolocation is not supported by this browser.');
 		}
 	}
+	componentDidUpdate () {
+		this.scrollToBottom();
+	}
+	scrollToBottom = () => {
+		console.log(this.charts);
+		if (this.state.showCharts || this.state.showForecast)
+			this.charts.scrollIntoView({
+				behavior : 'smooth'
+			});
+	};
 	render () {
 		return (
 			<div
@@ -131,27 +112,22 @@ export default class Main extends Component {
 						flexDirection : 'column',
 						alignItems    : 'center'
 					}}>
-					{/* <div style={{ display: 'flex', justifyContent: 'center' }}>
-						{' '}
-						<Avatar src={sun} style={{ width: '45px', height: '100%', marginRight: '10px' }} />
-						<Typography variant='h3' component='h3' style={{ fontFamliy: 'Merienda One' }}>
-							Weather
-						</Typography>
-					</div> */}
 					{this.state.current ? (
 						<CurrentWeather
 							current={this.state.current}
-							rain={this.state.hourly[47].rain ? this.state.hourly[47].rain['1h'] : 0}
+							rain={
+								this.state.daily[0].rain ? (
+									this.state.daily[0].rain
+								) : this.state.hourly[47].rain ? (
+									this.state.hourly[47].rain['1h']
+								) : (
+									0
+								)
+							}
 							hourly={this.state.hourly}
 						/>
 					) : (
-						<Loader
-							type='Bars'
-							color='#3f51b5'
-							height={400}
-							width={320}
-							// timeout={1000} //1 secs
-						/>
+						<Loader type='Bars' color='#3f51b5' height={400} width={320} />
 					)}
 					<div
 						style={{
@@ -177,16 +153,18 @@ export default class Main extends Component {
 						</Button>
 					</div>
 				</Grid>
+				<div ref={(el) => (this.charts = el)}>
+					{this.state.showForecast &&
+						this.state.daily.map((weather) => <WeatherInfo key={weather.dt} weather={weather} />)}
 
-				{this.state.showForecast &&
-					this.state.daily.map((weather) => <WeatherInfo key={weather.dt} weather={weather} />)}
-				{this.state.showCharts && (
-					<Charts
-						tempArray={this.getTemperatures(this.state.daily)}
-						rainArray={this.getRain(this.state.daily)}
-						windArray={this.getWind(this.state.daily)}
-					/>
-				)}
+					{this.state.showCharts && (
+						<Charts
+							tempArray={this.getTemperatures(this.state.daily)}
+							rainArray={this.getRain(this.state.daily)}
+							windArray={this.getWind(this.state.daily)}
+						/>
+					)}
+				</div>
 			</div>
 		);
 	}

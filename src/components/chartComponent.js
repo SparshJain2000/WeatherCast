@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-
 import CanvasJSReact from '../charts/canvasjs.react';
-const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 export default class Charts extends Component {
 	constructor (props) {
@@ -17,7 +15,6 @@ export default class Charts extends Component {
 		const windSpeed = this.props.windArray.map((data) => {
 			return { x: data.x, y: data.y.speed };
 		});
-		// console.log(this.props.windArra);
 		const windDir = this.props.windArray.map((data) => {
 			return { x: data.x, y: data.y.dir };
 		});

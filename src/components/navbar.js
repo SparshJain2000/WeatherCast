@@ -11,7 +11,7 @@ export default class Navbar extends Component {
 			<AppBar position='static'>
 				<Toolbar style={{ display: 'flex' }}>
 					<Avatar src={sun} style={{ width: '30px', height: '100%', marginRight: '12px' }} />
-					<Typography variant='h6'>{'WeatherApp'}</Typography>
+					<Typography variant='h6'>{'W'}</Typography>
 					<Button color='inherit' style={{ marginLeft: 'auto' }}>
 						{'</> '}with ❤︎ by Sparsh
 					</Button>
