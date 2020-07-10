@@ -94,6 +94,15 @@ export default class CurrentWeather extends Component {
 			showMore : !this.state.showMore
 		});
 	}
+	componentDidUpdate () {
+		this.scrollToBottom();
+	}
+	scrollToBottom = () => {
+		if (this.state.showMore)
+			this.charts.scrollIntoView({
+				behavior : 'smooth'
+			});
+	};
 	render () {
 		const weather = this.state.weather;
 		return (
@@ -129,6 +138,7 @@ export default class CurrentWeather extends Component {
 									alignContent    : 'center'
 								}}>
 								<img
+									alt='Weather Logo'
 									src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`}
 									style={{ width: '100%', maxWidth: '256px', height: 'auto', margin: 'auto' }}
 								/>
@@ -179,19 +189,7 @@ export default class CurrentWeather extends Component {
 									</div>
 								</Card>
 							</Grid>
-							{/* <Grid container direction='column' justify='between' alignItems='center' xs={12} md={6} item>
-							
-							<Card style={{ display: 'flex', backgroundColor: 'rgba(255,255,255,.5)', minWidth: '85%',pad9ng:'12px',color:'white',borderRadius:'14px' }}>
-								<CardMedia
-									component='img'
-									image={wind}
-									style={{ width: '100%', maxWidth: '70px', height: 'auto' }}
-								/>
-								<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-									<Typography variant='p'>{weather.wind_speed} km/h</Typography>
-								</CardContent>
-							</Card>
-						</Grid> */}
+
 							<Grid
 								container
 								direction='column'
@@ -222,16 +220,6 @@ export default class CurrentWeather extends Component {
 									/>
 
 									<div style={{ display: 'flex' }}>
-										{/* <CardMedia
-									component='img'
-									image={rain}
-									style={{
-										width    : '100%',
-										maxWidth : '70px',
-										height   : 'auto'
-									}}
-								/> */}
-
 										<CardContent
 											style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
 											{/* <Avatar src={rain} /> */}
@@ -242,20 +230,6 @@ export default class CurrentWeather extends Component {
 									</div>
 								</Card>
 							</Grid>
-							{/* <Grid container direction='column' justify='between' alignItems='center' xs={12} md={6} item>
-							<Card style={{  backgroundColor: 'rgba(255,255,255,.5)', minWidth: '85%',pad90ng:'12px',color:'white',borderRadius:'14px' }}>
-								<CardMedia
-									component='img'
-									image={clouds}
-									style={{ width: '100%', maxWidth: '70px', height: 'auto' }}
-								/>
-
-								<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-									
-									<Typography variant='p'>{weather.clouds} %</Typography>
-								</CardContent>
-							</Card>
-						</Grid> */}
 							<Grid
 								container
 								direction='column'
@@ -365,9 +339,11 @@ export default class CurrentWeather extends Component {
 								View More
 							</Button>
 						</Grid>
+
 						{this.state.showMore && (
 							<Zoom in={this.state.showMore} timeout={1500}>
 								<Grid
+									ref={(el) => (this.charts = el)}
 									xs={12}
 									container
 									style={{ display: 'flex', justifyContent: 'center', marginTop: '12px' }}>

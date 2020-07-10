@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import CanvasJSReact from '../charts/canvasjs.react';
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 export default class Charts extends Component {
-	constructor (props) {
-		super(props);
-	}
 	render () {
 		const dayTemp = this.props.tempArray.map((data) => {
 			return { x: data.x, y: data.y.day };
@@ -15,10 +12,10 @@ export default class Charts extends Component {
 		const windSpeed = this.props.windArray.map((data) => {
 			return { x: data.x, y: data.y.speed };
 		});
-		const windDir = this.props.windArray.map((data) => {
-			return { x: data.x, y: data.y.dir };
-		});
-		const options = {
+		// const windDir = this.props.windArray.map((data) => {
+		// 	return { x: data.x, y: data.y.dir };
+		// });
+		const optionsTemp = {
 			animationEnabled  : true,
 			animationDuration : 2000,
 			zoomEnabled       : true,
@@ -66,7 +63,7 @@ export default class Charts extends Component {
 			]
 		};
 
-		const options2 = {
+		const optionsRain = {
 			animationEnabled  : true,
 			animationDuration : 2000,
 			zoomEnabled       : true,
@@ -102,7 +99,7 @@ export default class Charts extends Component {
 				}
 			]
 		};
-		const options3 = {
+		const optionsWind = {
 			animationEnabled  : true,
 			animationDuration : 2000,
 			zoomEnabled       : true,
@@ -146,13 +143,13 @@ export default class Charts extends Component {
 		return (
 			<div>
 				<div style={{ margin: '24px' }}>
-					<CanvasJSChart options={options} />
+					<CanvasJSChart options={optionsTemp} />
 				</div>
 				<div style={{ margin: '24px' }}>
-					<CanvasJSChart options={options2} />
+					<CanvasJSChart options={optionsRain} />
 				</div>
 				<div style={{ margin: '24px' }}>
-					<CanvasJSChart options={options3} />
+					<CanvasJSChart options={optionsWind} />
 				</div>
 			</div>
 		);

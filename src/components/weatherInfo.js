@@ -7,9 +7,6 @@ import thermometer from '../images/thermometer.png';
 import date from '../images/date.png';
 
 export default class WeatherInfo extends Component {
-	constructor (props) {
-		super(props);
-	}
 	getDate (dt) {
 		let x = new Date(dt * 1000).toUTCString();
 		return x.slice(0, x.length - 18);
@@ -85,6 +82,7 @@ export default class WeatherInfo extends Component {
 							alignContent    : 'center'
 						}}>
 						<img
+							alt='Weather logo'
 							src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`}
 							style={{ width: '100%', maxWidth: '280px', height: 'auto', margin: 'auto' }}
 						/>

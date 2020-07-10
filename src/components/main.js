@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Grid, Zoom } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import axios from 'axios';
 import WeatherInfo from './weatherInfo';
 import CurrentWeather from './currentWeather';
@@ -89,7 +89,6 @@ export default class Main extends Component {
 		this.scrollToBottom();
 	}
 	scrollToBottom = () => {
-		console.log(this.charts);
 		if (this.state.showCharts || this.state.showForecast)
 			this.charts.scrollIntoView({
 				behavior : 'smooth'
