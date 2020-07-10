@@ -39,7 +39,7 @@ const Chart = ({ hourly }) => {
 		},
 		axisY             : {
 			title       : 'Temperature (in °C)',
-			margin      : 20,
+			margin      : 10,
 			includeZero : false,
 			suffix      : '°C'
 		},

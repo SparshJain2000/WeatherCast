@@ -35,7 +35,7 @@ export default class Charts extends Component {
 			},
 			axisY             : {
 				title       : 'Temperature (in °C)',
-				margin      : 20,
+				margin      : 10,
 				includeZero : false,
 				suffix      : '°C'
 			},
@@ -85,7 +85,7 @@ export default class Charts extends Component {
 			},
 			axisY             : {
 				title       : 'Rain (in mm)',
-				margin      : 20,
+				margin      : 10,
 				includeZero : false
 			},
 			data              : [
@@ -124,7 +124,7 @@ export default class Charts extends Component {
 			},
 			axisY             : {
 				title       : 'Wind Speed (in km/h)',
-				margin      : 20,
+				margin      : 10,
 				includeZero : false
 			},
 			data              : [
@@ -142,13 +142,13 @@ export default class Charts extends Component {
 
 		return (
 			<div>
-				<div style={{ margin: '24px' }}>
+				<div style={{ margin: '12px' }}>
 					<CanvasJSChart options={optionsTemp} />
 				</div>
-				<div style={{ margin: '24px' }}>
+				<div style={{ margin: '12px' }}>
 					<CanvasJSChart options={optionsRain} />
 				</div>
-				<div style={{ margin: '24px' }}>
+				<div style={{ margin: '12px' }}>
 					<CanvasJSChart options={optionsWind} />
 				</div>
 			</div>
