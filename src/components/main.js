@@ -1,32 +1,32 @@
 import React, { Component } from 'react';
-import { Button, Grid, Paper, Card, Typography, CardContent, Avatar } from '@material-ui/core';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { deepOrange, orange } from '@material-ui/core/colors';
+import { Button, Grid } from '@material-ui/core';
+// import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+// import { deepOrange, orange } from '@material-ui/core/colors';
 import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import WeatherInfo from './weatherInfo';
 import CurrentWeather from './currentWeather';
 import Loader from 'react-loader-spinner';
 import Charts from './chartComponent';
-import {
-	faWind,
-	faTemperatureHigh,
-	faCloudRain,
-	faCloudSun,
-	faLowVision,
-	faMapMarkerAlt
-} from '@fortawesome/free-solid-svg-icons';
-import sun from '../images/sun.svg';
+// import {
+// 	faWind,
+// 	faTemperatureHigh,
+// 	faCloudRain,
+// 	faCloudSun,
+// 	faLowVision,
+// 	faMapMarkerAlt
+// } from '@fortawesome/free-solid-svg-icons';
+// import sun from '../images/sun.svg';
 // const theme =
 export default class Main extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
-			current  			: null,
-			showForecast     	: false,
-			showCharts			:false,
-			daily    			: [],
-			hourly:[]
+			current      : null,
+			showForecast : false,
+			showCharts   : false,
+			daily        : [],
+			hourly       : []
 		};
 		this.toggleShowForecast = this.toggleShowForecast.bind(this);
 		this.toggleShowCharts = this.toggleShowCharts.bind(this);
@@ -49,34 +49,31 @@ export default class Main extends Component {
 	toggleShowForecast () {
 		this.setState({
 			showForecast : !this.state.showForecast,
-			showCharts:false
-			// showCharts:!this.state.showCharts
+			showCharts   : false
 		});
 	}
 	toggleShowCharts () {
 		this.setState({
-			showCharts : !this.state.showCharts,
-			showForecast:false
+			showCharts   : !this.state.showCharts,
+			showForecast : false
 		});
 	}
 	getDate (dt) {
 		let x = new Date(dt * 1000);
 		return `${x.getFullYear()},${x.getMonth()},${x.getDate()}`;
-		// return x.slice(5, x.length - 18);
-
 	}
-	getTemperatures(daily){
-		let temp=[]
-		daily.forEach((data)=>{
-			temp=[...temp,{x:new Date(this.getDate(data.dt)),y:data.temp.day}]
-		})
+	getTemperatures (daily) {
+		let temp = [];
+		daily.forEach((data) => {
+			temp = [ ...temp, { x: new Date(this.getDate(data.dt)), y: data.temp.day } ];
+		});
 		return temp;
 	}
-	getRain(daily){
-		let rain=[]
-		daily.forEach((data)=>{
-			rain=[...rain,{x:new Date(this.getDate(data.dt)),y:(data.rain?data.rain:0)}]
-		})
+	getRain (daily) {
+		let rain = [];
+		daily.forEach((data) => {
+			rain = [ ...rain, { x: new Date(this.getDate(data.dt)), y: data.rain ? data.rain : null } ];
+		});
 		return rain;
 	}
 	componentDidMount () {
@@ -95,9 +92,9 @@ export default class Main extends Component {
 						this.setState({
 							daily   : resp.data.daily,
 							current : resp.data.current,
-							hourly:resp.data.hourly
+							hourly  : resp.data.hourly
 						});
-						console.log(this.state.current);
+						console.log(resp.data);
 					})
 					.catch((err) => console.log(err));
 			});
@@ -107,7 +104,6 @@ export default class Main extends Component {
 	}
 	render () {
 		return (
-			// <ThemeProvider theme={this.getTheme()}>
 			<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'between', margin: '12px' }}>
 				<Grid
 					container
@@ -124,17 +120,21 @@ export default class Main extends Component {
 							Weather
 						</Typography>
 					</div> */}
-					{this.state.current ? 
-					<CurrentWeather current={this.state.current} rain={this.state.hourly[22].rain['1h']} /> 
-					:
-					 <Loader
-					 	type="Bars"
-        				color="#3f51b5"
-         				height={300}
-         				width={300}
-         				// timeout={1000} //1 secs
- 
-      				/>}
+					{this.state.current ? (
+						<CurrentWeather
+							current={this.state.current}
+							rain={this.state.hourly[47].rain ? this.state.hourly[47].rain['1h'] : 0}
+							hourly={this.state.hourly}
+						/>
+					) : (
+						<Loader
+							type='Bars'
+							color='#3f51b5'
+							height={300}
+							width={300}
+							// timeout={1000} //1 secs
+						/>
+					)}
 					<div
 						style={{
 							display        : 'flex',
@@ -160,11 +160,16 @@ export default class Main extends Component {
 						</Button>
 					</div>
 				</Grid>
+
 				{this.state.showForecast &&
 					this.state.daily.map((weather) => <WeatherInfo key={weather.dt} weather={weather} />)}
-					{this.state.showCharts && <Charts tempArray={this.getTemperatures(this.state.daily)} rainArray={this.getRain(this.state.daily)}/>}
+				{this.state.showCharts && (
+					<Charts
+						tempArray={this.getTemperatures(this.state.daily)}
+						rainArray={this.getRain(this.state.daily)}
+					/>
+				)}
 			</div>
-			// </ThemeProvider>
 		);
 	}
 }
