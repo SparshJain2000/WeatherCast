@@ -2,7 +2,7 @@
 
 Weather Forecasting website using React JS
 
-[![](https://img.shields.io/static/v1?message=Front-end&label=ReactJS&logo=react&color=darkred&style=for-the-badge)](https://reactjs.org/)
+[![](https://img.shields.io/static/v1?message=Front-end&label=ReactJS&logo=react&color=blue&style=for-the-badge)](https://reactjs.org/)
 ![Netlify](https://img.shields.io/netlify/81fb9f9a-3a63-4b63-bd8c-070f0e3dfc95?color=skyblue&logo=netlify&style=for-the-badge)
 ![GitHub](https://img.shields.io/github/license/SparshJain2000/WeatherCast?color=orange&logo=github&style=for-the-badge)
 
