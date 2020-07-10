@@ -1,8 +1,28 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# WeatherCast
 
-## Available Scripts
+Weather Forecasting website using React JS
 
-In the project directory, you can run:
+[![](https://img.shields.io/static/v1?message=Front-end&label=ReactJS&logo=react&color=darkred&style=for-the-badge)](https://reactjs.org/)
+![Netlify](https://img.shields.io/netlify/81fb9f9a-3a63-4b63-bd8c-070f0e3dfc95?color=skyblue&logo=netlify&style=for-the-badge)
+![GitHub](https://img.shields.io/github/license/SparshJain2000/WeatherCast?color=orange&logo=github&style=for-the-badge)
+
+## Techonologies Used
+
+- React JS
+- CSS : [Material UI](https://material-ui.com/)
+- API : [Openweathermap](https://openweathermap.org/api)
+
+
+## Installation
+
+Clone the repo
+```bash
+$ git clone https://github.com/SparshJain2000/WeatherCast.git
+```
+
+Go to WeatherCast folder
+
+Run the  scripts
 
 ### `npm start`
 
@@ -25,44 +45,19 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
 ### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## LICENSE
+**APACHE-2.0 &copy; [Sparsh Jain](https://github.com/SparshJain2000/blogApp/blob/master/LICENSE)**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Support
+Give a 🌟 to this repo if you liked it .
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Connect with me
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+[![Instagram](https://img.shields.io/static/v1.svg?label=follow&message=@sparsh._jain&color=grey&logo=instagram&style=for-the-badge&logoColor=white&colorA=critical)](https://www.instagram.com/sparsh._jain/) [![LinkedIn](https://img.shields.io/static/v1.svg?label=connect&message=@SparshJain&color=success&logo=linkedin&style=for-the-badge&logoColor=white&colorA=blue)](https://www.linkedin.com/in/sparsh-jain-87379a168/) [![Github](https://img.shields.io/static/v1.svg?label=follow&message=@SparshJain2000&color=grey&logo=github&style=for-the-badge&logoColor=white&colorA=black)](https://www.github.com/SparshJain2000/)
