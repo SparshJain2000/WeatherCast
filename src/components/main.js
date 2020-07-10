@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, Zoom } from '@material-ui/core';
 // import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 // import { deepOrange, orange } from '@material-ui/core/colors';
 import axios from 'axios';
@@ -65,9 +65,21 @@ export default class Main extends Component {
 	getTemperatures (daily) {
 		let temp = [];
 		daily.forEach((data) => {
-			temp = [ ...temp, { x: new Date(this.getDate(data.dt)), y: data.temp.day } ];
+			temp = [ ...temp, { x: new Date(this.getDate(data.dt)), y: data.temp } ];
 		});
+		console.log(temp);
 		return temp;
+	}
+	getWind (daily) {
+		let wind = [];
+		daily.forEach((data) => {
+			wind = [
+				...wind,
+				{ x: new Date(this.getDate(data.dt)), y: { speed: data.wind_speed, dir: data.wind_deg } }
+			];
+		});
+		console.log(wind);
+		return wind;
 	}
 	getRain (daily) {
 		let rain = [];
@@ -104,7 +116,13 @@ export default class Main extends Component {
 	}
 	render () {
 		return (
-			<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'between', margin: '12px' }}>
+			<div
+				style={{
+					display        : 'flex',
+					flexDirection  : 'column',
+					justifyContent : 'between',
+					margin         : '12px'
+				}}>
 				<Grid
 					container
 					spacing={1}
@@ -130,8 +148,8 @@ export default class Main extends Component {
 						<Loader
 							type='Bars'
 							color='#3f51b5'
-							height={300}
-							width={300}
+							height={400}
+							width={320}
 							// timeout={1000} //1 secs
 						/>
 					)}
@@ -145,9 +163,8 @@ export default class Main extends Component {
 						<Button
 							size='large'
 							variant='contained'
-							color='primary'
 							onClick={this.toggleShowForecast}
-							style={{ margin: '8px', width: '50%' }}>
+							style={{ margin: '8px', width: '50%', backgroundColor: '#00695f', color: 'white' }}>
 							View Forecast
 						</Button>
 						<Button
@@ -167,6 +184,7 @@ export default class Main extends Component {
 					<Charts
 						tempArray={this.getTemperatures(this.state.daily)}
 						rainArray={this.getRain(this.state.daily)}
+						windArray={this.getWind(this.state.daily)}
 					/>
 				)}
 			</div>

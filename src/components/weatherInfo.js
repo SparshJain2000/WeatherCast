@@ -50,17 +50,21 @@ export default class WeatherInfo extends Component {
 					padding         : '18px',
 					maxWidth        : '90vw',
 					alignContent    : 'center'
-				}}>
-				<Grid container direction='column' justify='center' alignItems='center' xs={12} item>
+				}}
+				justify='center'
+				alignContent='center'>
+				<Grid container direction='column' justify='center' alignContent='center' xs={12} md={8} item>
 					<Card
 						style={{
 							display         : 'flex',
-							minWidth        : '70%',
+							maxWidth        : '100%',
+							minWidth        : '90%',
 							padding         : '12px',
 							marginLeft      : 'auto',
 							marginRight     : 'auto',
 							borderRadius    : '12px',
-							backgroundColor : 'rgba(255,255,255,.3)'
+							backgroundColor : 'rgba(0,0,0,.3)',
+							color           : 'white'
 						}}
 						m={3}
 						p={3}>
@@ -70,7 +74,7 @@ export default class WeatherInfo extends Component {
 							style={{
 								marginTop    : 'auto',
 								marginBottom : 'auto',
-								marginLeft   : '15%',
+								marginLeft   : '10%',
 								width        : '100%',
 								maxWidth     : '50px',
 								height       : 'auto',
@@ -79,7 +83,9 @@ export default class WeatherInfo extends Component {
 						/>
 						<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
 							{/* <Avatar src={date} /> */}
-							<Typography variant='h5'>{this.getDate(weather.dt)}</Typography>
+							<Typography variant='h5' style={{ fontFamily: 'Raleway' }}>
+								{this.getDate(weather.dt)}
+							</Typography>
 						</CardContent>
 					</Card>
 				</Grid>
@@ -105,12 +111,15 @@ export default class WeatherInfo extends Component {
 						</CardContent>
 					</Card>
 				</Grid>
-				<Grid container justify='center' alignItems='center' xs={12} md={6} item spacing={2}>
+				<Grid container justify='center' alignItems='center' xs={12} md={6} item>
 					<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
 						<Card
 							style={{
 								backgroundColor : 'rgba(255,255,255,.5)',
-								minWidth        : '100%',
+								minWidth        : '90%',
+								marginLeft      : 'auto',
+								marginRight     : 'auto',
+								margin          : '6px',
 								padding         : '2px',
 								borderRadius    : '14px'
 							}}>
@@ -144,7 +153,10 @@ export default class WeatherInfo extends Component {
 						<Card
 							style={{
 								backgroundColor : 'rgba(255,255,255,.5)',
-								minWidth        : '100%',
+								minWidth        : '90%',
+								marginLeft      : 'auto',
+								marginRight     : 'auto',
+								margin          : '6px',
 								padding         : '2px',
 								borderRadius    : '14px'
 							}}>
@@ -174,7 +186,10 @@ export default class WeatherInfo extends Component {
 						<Card
 							style={{
 								backgroundColor : 'rgba(255,255,255,.5)',
-								minWidth        : '100%',
+								minWidth        : '90%',
+								marginLeft      : 'auto',
+								marginRight     : 'auto',
+								margin          : '6px',
 								padding         : '2px',
 								borderRadius    : '14px'
 							}}>
@@ -208,7 +223,10 @@ export default class WeatherInfo extends Component {
 						<Card
 							style={{
 								backgroundColor : 'rgba(255,255,255,.5)',
-								minWidth        : '100%',
+								minWidth        : '90%',
+								marginLeft      : 'auto',
+								marginRight     : 'auto',
+								margin          : '6px',
 								padding         : '2px',
 								borderRadius    : '14px'
 							}}>

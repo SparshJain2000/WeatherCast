@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Loader from 'react-loader-spinner';
+import CanvasJSReact from '../charts/canvasjs.react';
+
 import rain from '../images/rain.png';
 import fog from '../images/fog.png';
 import sunrise from '../images/sunrise.png';
@@ -6,23 +9,9 @@ import sunset from '../images/sunset.png';
 import thermometer from '../images/thermometer.png';
 import haze from '../images/haze.png';
 import wind from '../images/wind.png';
-import Loader from 'react-loader-spinner';
 import clouds from '../images/clouds.png';
 import date from '../images/date.png';
-import CanvasJSReact from '../charts/canvasjs.react';
-import {
-	Button,
-	CardHeader,
-	Grid,
-	Paper,
-	Card,
-	Typography,
-	CardContent,
-	Avatar,
-	Zoom,
-	CardMedia,
-	CardActionArea
-} from '@material-ui/core';
+import { Button, CardHeader, Grid, Card, Typography, CardContent, Avatar, Zoom } from '@material-ui/core';
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 // const getDate=(dt)=> {
 // 	let x = new Date(dt * 1000);
@@ -30,10 +19,10 @@ const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 // }
 const Chart = ({ hourly }) => {
 	const tempHourly = hourly.map((data) => {
-		return { x: data.dt * 1000, y: data.temp };
+		return { x: data.dt * 1000, y: data.temp, weather: data.weather[0].main };
 	});
 	const feelsLike = hourly.map((data) => {
-		return { x: data.dt * 1000, y: data.feels_like };
+		return { x: data.dt * 1000, y: data.feels_like, weather: data.weather[0].main };
 	});
 	const options = {
 		animationEnabled  : true,
@@ -41,13 +30,21 @@ const Chart = ({ hourly }) => {
 		zoomEnabled       : true,
 		backgroundColor   : 'rgba(255,255,255,.4)',
 		title             : {
-			text    : 'Temperature for next 7 days',
+			text    : 'Temperature for next 48 hours',
 			padding : 10
 		},
 		axisX             : {
-			valueFormatString : 'DD MMM h:mm',
+			valueFormatString : 'DD MMM H:mm',
 			margin            : 10,
-			labelWrap         : false
+			labelWrap         : true,
+			crosshair         : {
+				enabled         : true,
+				snapToDataPoint : false
+			}
+		},
+		toolTip           : {
+			content   : '{name}: {y} <hr/>weather:{weather}',
+			fontColor : '#00695f'
 		},
 		axisY             : {
 			title       : 'Temperature (in °C)',
@@ -61,7 +58,7 @@ const Chart = ({ hourly }) => {
 				xValueFormatString : 'H:mm DD MMM',
 				showInLegend       : true,
 				legendText         : 'Temperature',
-
+				name               : 'Temperature',
 				yValueFormatString : '## °C',
 				color              : '#2c387e',
 				xValueType         : 'dateTime',
@@ -71,6 +68,7 @@ const Chart = ({ hourly }) => {
 				type               : 'spline',
 				xValueFormatString : 'H:mm DD MMM',
 				showInLegend       : true,
+				name               : 'feels like',
 				legendText         : 'Feels Like',
 				yValueFormatString : '## °C',
 				color              : '#aa2e25',
@@ -117,7 +115,7 @@ export default class CurrentWeather extends Component {
 						style={{
 							backgroundColor : 'rgba(0,0,0,.4)',
 							borderRadius    : '12px',
-							marginTop       : '12px',
+							marginTop       : '4px',
 							padding         : '12px',
 							maxWidth        : '90vw',
 							height          : 'fit-content'
@@ -125,16 +123,15 @@ export default class CurrentWeather extends Component {
 						<Grid container direction='column' justify='center' alignItems='center' xs={12} item>
 							<Typography
 								variant='h5'
-								style={{ textAlign: 'center', color: 'white', fontFamily: 'Merienda One' }}>
-								Today's weather
+								style={{ textAlign: 'center', color: 'white', fontFamily: 'Lobster' }}>
+								Current weather
 							</Typography>
 						</Grid>
 						<Grid container justify='center' alignItems='center' xs={12} md={6} item>
 							<Card
-								variant='outlined'
 								style={{
 									borderRadius    : '16px',
-									backgroundColor : 'rgba(255,255,255,.4)',
+									backgroundColor : 'rgba(255,255,255,.5)',
 									width           : '100%',
 									display         : 'flex',
 									flexDirection   : 'column',
@@ -145,20 +142,30 @@ export default class CurrentWeather extends Component {
 									style={{ width: '100%', maxWidth: '256px', height: 'auto', margin: 'auto' }}
 								/>
 								<CardContent>
-									<Typography variant='h6' style={{ textAlign: 'center' }}>
-										{weather.weather[0].description}
+									<Typography variant='h4' style={{ textAlign: 'center' }}>
+										{weather.weather[0].main} : {weather.weather[0].description}
 									</Typography>
 								</CardContent>
 							</Card>
 						</Grid>
-						<Grid container justify='center' alignItems='center' xs={12} md={6} item spacing={1}>
-							<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
+						<Grid container justify='center' alignItems='center' xs={12} md={6} item>
+							<Grid
+								container
+								direction='column'
+								justify='between'
+								alignItems='center'
+								xs={12}
+								md={6}
+								item>
 								<Card
 									style={{
 										backgroundColor : 'rgba(255,255,255,.5)',
 										minWidth        : '90%',
 										padding         : '8px',
-										borderRadius    : '14px'
+										borderRadius    : '14px',
+										marginLeft      : 'auto',
+										marginRight     : 'auto',
+										margin          : '6px'
 									}}>
 									<CardHeader
 										avatar={<Avatar src={thermometer} />}
@@ -174,33 +181,43 @@ export default class CurrentWeather extends Component {
 										<CardContent
 											style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
 											{/* <Avatar src={thermometer} /> */}
-											<Typography variant='h6' style={{ textAlign: 'center' }}>
+											<Typography variant='p' style={{ textAlign: 'center' }}>
 												{weather.temp} °C
 											</Typography>
 										</CardContent>
 									</div>
 								</Card>
 							</Grid>
-							{/* <Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
+							{/* <Grid container direction='column' justify='between' alignItems='center' xs={12} md={6} item>
 							
-							<Card style={{ display: 'flex', backgroundColor: 'rgba(255,255,255,.5)', minWidth: '85%',padding:'12px',color:'white',borderRadius:'14px' }}>
+							<Card style={{ display: 'flex', backgroundColor: 'rgba(255,255,255,.5)', minWidth: '85%',pad9ng:'12px',color:'white',borderRadius:'14px' }}>
 								<CardMedia
 									component='img'
 									image={wind}
 									style={{ width: '100%', maxWidth: '70px', height: 'auto' }}
 								/>
 								<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-									<Typography variant='h6'>{weather.wind_speed} km/h</Typography>
+									<Typography variant='p'>{weather.wind_speed} km/h</Typography>
 								</CardContent>
 							</Card>
 						</Grid> */}
-							<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
+							<Grid
+								container
+								direction='column'
+								justify='between'
+								alignItems='center'
+								xs={12}
+								md={6}
+								item>
 								<Card
 									style={{
 										backgroundColor : 'rgba(255,255,255,.5)',
 										minWidth        : '90%',
 										padding         : '8px',
-										borderRadius    : '14px'
+										borderRadius    : '14px',
+										marginLeft      : 'auto',
+										marginRight     : 'auto',
+										margin          : '6px'
 									}}>
 									<CardHeader
 										avatar={<Avatar src={rain} />}
@@ -227,15 +244,15 @@ export default class CurrentWeather extends Component {
 										<CardContent
 											style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
 											{/* <Avatar src={rain} /> */}
-											<Typography variant='h6' style={{ textAlign: 'center' }}>
+											<Typography variant='p' style={{ textAlign: 'center' }}>
 												{this.props.rain} %
 											</Typography>
 										</CardContent>
 									</div>
 								</Card>
 							</Grid>
-							{/* <Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
-							<Card style={{  backgroundColor: 'rgba(255,255,255,.5)', minWidth: '85%',padding:'12px',color:'white',borderRadius:'14px' }}>
+							{/* <Grid container direction='column' justify='between' alignItems='center' xs={12} md={6} item>
+							<Card style={{  backgroundColor: 'rgba(255,255,255,.5)', minWidth: '85%',pad90ng:'12px',color:'white',borderRadius:'14px' }}>
 								<CardMedia
 									component='img'
 									image={clouds}
@@ -244,17 +261,27 @@ export default class CurrentWeather extends Component {
 
 								<CardContent style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
 									
-									<Typography variant='h6'>{weather.clouds} %</Typography>
+									<Typography variant='p'>{weather.clouds} %</Typography>
 								</CardContent>
 							</Card>
 						</Grid> */}
-							<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
+							<Grid
+								container
+								direction='column'
+								justify='between'
+								alignItems='center'
+								xs={12}
+								md={6}
+								item>
 								<Card
 									style={{
 										backgroundColor : 'rgba(255,255,255,.5)',
 										minWidth        : '90%',
 										padding         : '8px',
-										borderRadius    : '14px'
+										borderRadius    : '14px',
+										marginLeft      : 'auto',
+										marginRight     : 'auto',
+										margin          : '6px'
 									}}>
 									<CardHeader
 										avatar={<Avatar src={sunset} />}
@@ -276,20 +303,30 @@ export default class CurrentWeather extends Component {
 										<CardContent
 											style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
 											{/* <Avatar src={sunset} /> */}
-											<Typography variant='h6' style={{ textAlign: 'center' }}>
+											<Typography variant='p' style={{ textAlign: 'center' }}>
 												{this.getTime(weather.sunset)}
 											</Typography>
 										</CardContent>
 									</div>
 								</Card>
 							</Grid>
-							<Grid container direction='column' justify='center' alignItems='center' xs={12} md={6} item>
+							<Grid
+								container
+								direction='column'
+								justify='between'
+								alignItems='center'
+								xs={12}
+								md={6}
+								item>
 								<Card
 									style={{
 										backgroundColor : 'rgba(255,255,255,.5)',
 										minWidth        : '90%',
 										padding         : '8px',
-										borderRadius    : '14px'
+										borderRadius    : '14px',
+										marginLeft      : 'auto',
+										marginRight     : 'auto',
+										margin          : '6px'
 									}}>
 									<CardHeader
 										avatar={<Avatar src={sunrise} />}
@@ -312,7 +349,7 @@ export default class CurrentWeather extends Component {
 										<CardContent
 											style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
 											{/* <Avatar src={sunrise} /> */}
-											<Typography variant='h6' style={{ textAlign: 'center' }}>
+											<Typography variant='p' style={{ textAlign: 'center' }}>
 												{this.getTime(weather.sunrise)}
 											</Typography>
 										</CardContent>
@@ -327,8 +364,11 @@ export default class CurrentWeather extends Component {
 								style={{
 									minWidth        : '95%',
 									borderRadius    : '12px',
-									backgroundColor : '#00695f',
-									color           : 'white'
+									backgroundColor : '#3f51b5',
+									color           : 'white',
+									marginLeft      : 'auto',
+									marginRight     : 'auto',
+									margin          : '0px'
 								}}
 								onClick={this.showToggle}>
 								View More
@@ -339,7 +379,7 @@ export default class CurrentWeather extends Component {
 								<Grid
 									xs={12}
 									container
-									style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
+									style={{ display: 'flex', justifyContent: 'center', marginTop: '12px' }}>
 									<Chart hourly={this.props.hourly} style={{ borderRadius: '12px' }} />
 								</Grid>
 							</Zoom>

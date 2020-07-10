@@ -1,7 +1,4 @@
 import React from 'react';
-import './App.css';
-// import { Button } from "@material-ui/core";
-
 import Main from './components/main';
 import Navbar from './components/navbar';
 function App () {
