@@ -50,7 +50,7 @@ const Chart = ({ hourly }) => {
 				showInLegend       : true,
 				legendText         : 'Temperature',
 				name               : 'Temperature',
-				yValueFormatString : '## °C',
+				yValueFormatString : '##.# °C',
 				color              : '#2c387e',
 				xValueType         : 'dateTime',
 				dataPoints         : tempHourly
@@ -61,7 +61,7 @@ const Chart = ({ hourly }) => {
 				showInLegend       : true,
 				name               : 'feels like',
 				legendText         : 'Feels Like',
-				yValueFormatString : '## °C',
+				yValueFormatString : '##.# °C',
 				color              : '#aa2e25',
 				xValueType         : 'dateTime',
 				dataPoints         : feelsLike

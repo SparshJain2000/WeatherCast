@@ -78,13 +78,11 @@ export default class Main extends Component {
 							.env.REACT_APP_API_KEY}&units=metric`
 					)
 					.then((resp) => {
-						// console.log(resp);
 						this.setState({
 							daily   : resp.data.daily,
 							current : resp.data.current,
 							hourly  : resp.data.hourly,
 						});
-						// console.log(resp.data);
 					})
 					.catch((err) => {
 						console.log(err);
@@ -103,11 +101,12 @@ export default class Main extends Component {
 			},(err)=>{
 				console.log(err);
 				this.setState({open:true});
-				axios.get('http://www.geoplugin.net/json.gp')
-					.then((data)=>{
-						const lat=data.data.geoplugin_latitude;
-						const long=data.data.geoplugin_longitude;
-						// console.log(data.data.geoplugin_city);
+				axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=${process.env.REACT_APP_GEOLOCATION_KEY}`,{
+				})
+					.then(({data})=>{
+						console.log(data.district)
+						const lat=data.latitude;
+						const long=data.longitude;
 						this.getWeather({lat,long});
 					})
 					.catch(err=>console.log(err))

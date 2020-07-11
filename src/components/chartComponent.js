@@ -47,7 +47,7 @@ export default class Charts extends Component {
 				{
 					type               : 'splineArea',
 					xValueFormatString : 'DD MMM',
-					yValueFormatString : '## °C',
+					yValueFormatString : '##.# °C',
 					color              : '#ff3d00',
 					name               : 'day',
 					dataPoints         : dayTemp
@@ -55,7 +55,7 @@ export default class Charts extends Component {
 				{
 					type               : 'splineArea',
 					xValueFormatString : 'DD MMM',
-					yValueFormatString : '## °C',
+					yValueFormatString : '##.# °C',
 					color              : '#2c387e',
 					name               : 'night',
 					dataPoints         : nightTemp
@@ -92,7 +92,7 @@ export default class Charts extends Component {
 				{
 					type               : 'splineArea',
 					xValueFormatString : 'DD MMM',
-					yValueFormatString : '## mm',
+					yValueFormatString : '##.## mm',
 					color              : '#4657bb',
 					dataPoints         : this.props.rainArray,
 					connectNullData    : true
@@ -132,7 +132,7 @@ export default class Charts extends Component {
 					type               : 'splineArea',
 					name               : 'Wind Speed',
 					xValueFormatString : 'DD MMM',
-					yValueFormatString : '## km/h',
+					yValueFormatString : '##.## km/h',
 					color              : '#ff1744',
 					dataPoints         : windSpeed,
 					connectNullData    : true
