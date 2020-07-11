@@ -5,7 +5,11 @@ import WeatherInfo from './weatherInfo';
 import CurrentWeather from './currentWeather';
 import Loader from 'react-loader-spinner';
 import Charts from './chartComponent';
-
+import Alert from '@material-ui/lab/Alert';
+import IconButton from '@material-ui/core/IconButton';
+import Collapse from '@material-ui/core/Collapse';
+// import Button from '@material-ui/core/Button';
+import CloseIcon from '@material-ui/icons/Close';
 export default class Main extends Component {
 	constructor (props) {
 		super(props);
@@ -14,10 +18,12 @@ export default class Main extends Component {
 			showForecast : false,
 			showCharts   : false,
 			daily        : [],
-			hourly       : []
+			hourly       : [],
+			open:false
 		};
 		this.toggleShowForecast = this.toggleShowForecast.bind(this);
 		this.toggleShowCharts = this.toggleShowCharts.bind(this);
+		this.toggleOpen=this.toggleOpen.bind(this);
 	}
 	toggleShowForecast () {
 		this.setState({
@@ -30,6 +36,11 @@ export default class Main extends Component {
 			showCharts   : !this.state.showCharts,
 			showForecast : false
 		});
+	}
+	toggleOpen(){
+		this.setState({
+			open:!this.state.open
+		})
 	}
 	getDate (dt) {
 		let x = new Date(dt * 1000);
@@ -61,7 +72,9 @@ export default class Main extends Component {
 	}
 	componentDidMount () {
 		if (navigator.geolocation) {
+			console.log('inside geo')
 			navigator.geolocation.getCurrentPosition((position) => {
+				console.log('inside pos')
 				const lat = position.coords.latitude;
 				const long = position.coords.longitude;
 				console.log('Latitude: ' + position.coords.latitude + '<br>Longitude: ' + position.coords.longitude);
@@ -75,14 +88,20 @@ export default class Main extends Component {
 						this.setState({
 							daily   : resp.data.daily,
 							current : resp.data.current,
-							hourly  : resp.data.hourly
+							hourly  : resp.data.hourly,
+							open:false
 						});
 						console.log(resp.data);
 					})
-					.catch((err) => console.log(err));
+					.catch((err) => {console.log(err);this.setState({open:true})});
+			},(err)=>{
+			console.log(err);
+			this.setState({open:true});
+
 			});
 		} else {
 			console.log('Geolocation is not supported by this browser.');
+			this.setState({open:true});
 		}
 	}
 	componentDidUpdate () {
@@ -103,6 +122,26 @@ export default class Main extends Component {
 					justifyContent : 'between',
 					margin         : '12px'
 				}}>
+				 <Collapse in={this.state.open}>
+        <Alert
+		style={{marginBottom:'8px'}}
+		severity="warning"
+          action={
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              size="small"
+              onClick={
+                this.toggleOpen
+              }
+            >
+              <CloseIcon fontSize="inherit" />
+            </IconButton>
+          }
+        >
+          Please allow location permissions
+        </Alert>
+      </Collapse>
 				<Grid
 					container
 					spacing={1}
