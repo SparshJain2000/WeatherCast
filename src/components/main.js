@@ -24,6 +24,7 @@ export default class Main extends Component {
 		this.toggleShowForecast = this.toggleShowForecast.bind(this);
 		this.toggleShowCharts = this.toggleShowCharts.bind(this);
 		this.toggleOpen=this.toggleOpen.bind(this);
+		this.getWeather=this.getWeather.bind(this)
 	}
 	toggleShowForecast () {
 		this.setState({
@@ -70,34 +71,46 @@ export default class Main extends Component {
 		});
 		return rain;
 	}
-	componentDidMount () {
-		if (navigator.geolocation) {
-			console.log('inside geo')
-			navigator.geolocation.getCurrentPosition((position) => {
-				console.log('inside pos')
-				const lat = position.coords.latitude;
-				const long = position.coords.longitude;
-				console.log('Latitude: ' + position.coords.latitude + '<br>Longitude: ' + position.coords.longitude);
-				axios
+	getWeather({lat,long}){
+		axios
 					.get(
 						`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely&appid=${process
 							.env.REACT_APP_API_KEY}&units=metric`
 					)
 					.then((resp) => {
-						console.log(resp);
+						// console.log(resp);
 						this.setState({
 							daily   : resp.data.daily,
 							current : resp.data.current,
 							hourly  : resp.data.hourly,
-							open:false
 						});
-						console.log(resp.data);
+						// console.log(resp.data);
 					})
-					.catch((err) => {console.log(err);this.setState({open:true})});
+					.catch((err) => {
+						console.log(err);
+						this.setState({open:true})
+					});
+	}
+	componentDidMount () {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition((position) => {
+				const lat = position.coords.latitude;
+				const long = position.coords.longitude;
+				this.setState({open:false})
+				this.getWeather({lat,long});
+				console.log('Latitude: ' + position.coords.latitude + '<br>Longitude: ' + position.coords.longitude);
+				
 			},(err)=>{
-			console.log(err);
-			this.setState({open:true});
-
+				console.log(err);
+				this.setState({open:true});
+				axios.get('http://www.geoplugin.net/json.gp')
+					.then((data)=>{
+						const lat=data.data.geoplugin_latitude;
+						const long=data.data.geoplugin_longitude;
+						// console.log(data.data.geoplugin_city);
+						this.getWeather({lat,long});
+					})
+					.catch(err=>console.log(err))
 			});
 		} else {
 			console.log('Geolocation is not supported by this browser.');
@@ -139,7 +152,7 @@ export default class Main extends Component {
             </IconButton>
           }
         >
-          Please allow location permissions
+          Please allow location permissions for better results
         </Alert>
       </Collapse>
 				<Grid
