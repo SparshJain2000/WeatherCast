@@ -16,13 +16,38 @@ Weather Forecasting website using React JS
 ## Installation
 
 Clone the repo
+
 ```bash
-$ git clone https://github.com/SparshJain2000/WeatherCast.git
+git clone https://github.com/SparshJain2000/WeatherCast.git
 ```
 
 Go to WeatherCast folder
 
-Run the  scripts
+## Create `.env` file
+
+```.txt
+REACT_APP_API_KEY=<API_KEY>
+REACT_APP_GEOLOCATION_KEY=<GEOLOCATION_KEY>
+```
+
+## Start using Docker
+
+Build the docker image
+
+```bash
+docker build -t weathercast:latest .
+```
+
+Run the docker container
+
+```bash
+docker run --name weathercast-container -it -p 3001:3000 weathercast:latest
+```
+
+To view on browser, open `http://localhost:3001`
+
+
+## Run the scripts
 
 ### `npm start`
 
